@@ -23,5 +23,11 @@ export const routes: Routes = [
       },
     ]
   },
-  { path: '**', redirectTo: '' }
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./domains/public/pages/not-found/not-found').then(
+        (m) => m.NotFound
+      ),
+  }
 ];
