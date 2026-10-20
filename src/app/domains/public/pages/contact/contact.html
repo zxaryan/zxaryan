@@ -1,0 +1,157 @@
+
+<section class="mx-auto w-full max-w-7xl py-8 sm:py-12">
+
+  <!-- Heading -->
+  <div class="mb-8">
+    <p class="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">
+      Contact
+    </p>
+
+    <h1 class="text-3xl font-bold tracking-tight text-text sm:text-4xl">
+      Let's get in touch.
+    </h1>
+
+    <p class="mt-3 text-sm leading-6 text-muted">
+      Have a project or opportunity in mind? Send me a message.
+    </p>
+  </div>
+
+  <!-- Contact form -->
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="submit()"
+    class="space-y-5 rounded-2xl border border-border bg-surface p-5 sm:p-7"
+    novalidate
+  >
+
+    <!-- Name -->
+    <div>
+      <label for="name" class="mb-2 block text-sm font-medium text-text">
+        Name
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Enter your name"
+        autocomplete="name"
+        required
+        [attr.aria-invalid]="contactForm.controls.name.invalid && contactForm.controls.name.touched"
+        class="w-full rounded-lg border border-border bg-bg px-4 py-3
+               text-text placeholder:text-muted/70 outline-none
+               transition focus:border-primary focus:ring-2
+               focus:ring-primary/20"
+      />
+
+      @if (contactForm.controls.name.touched && contactForm.controls.name.invalid) {
+        <p class="mt-1 text-sm text-danger">Please enter your name.</p>
+      }
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email" class="mb-2 block text-sm font-medium text-text">
+        Email address
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="you@example.com"
+        autocomplete="email"
+        required
+        [attr.aria-invalid]="contactForm.controls.email.invalid && contactForm.controls.email.touched"
+        class="w-full rounded-lg border border-border bg-bg px-4 py-3
+               text-text placeholder:text-muted/70 outline-none
+               transition focus:border-primary focus:ring-2
+               focus:ring-primary/20"
+      />
+
+      @if (contactForm.controls.email.touched && contactForm.controls.email.invalid) {
+        <p class="mt-1 text-sm text-danger">
+          Please enter a valid email address.
+        </p>
+      }
+    </div>
+
+    <!-- Message -->
+    <div>
+      <label for="message" class="mb-2 block text-sm font-medium text-text">
+        Message
+      </label>
+
+      <textarea
+        id="message"
+        formControlName="message"
+        placeholder="Tell me about your project or opportunity..."
+        rows="5"
+        required
+        [attr.aria-invalid]="contactForm.controls.message.invalid && contactForm.controls.message.touched"
+        class="w-full resize-y rounded-lg border border-border bg-bg
+               px-4 py-3 text-text placeholder:text-muted/70 outline-none
+               transition focus:border-primary focus:ring-2
+               focus:ring-primary/20"
+      ></textarea>
+
+      @if (contactForm.controls.message.touched && contactForm.controls.message.invalid) {
+        <p class="mt-1 text-sm text-danger">
+          Please enter a message.
+        </p>
+      }
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-wrap gap-3 pt-1">
+      <button
+        type="submit"
+        [disabled]="contactForm.invalid || contactForm.pending"
+        class="rounded-lg bg-primary px-5 py-3 text-sm font-semibold
+               text-white transition hover:bg-primary-hover
+               focus-visible:outline-none focus-visible:ring-2
+               focus-visible:ring-primary focus-visible:ring-offset-2
+               focus-visible:ring-offset-surface
+               disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        Send message
+      </button>
+
+      <button
+        type="button"
+        (click)="reset()"
+        class="rounded-lg border border-border px-5 py-3 text-sm
+               font-medium text-text transition hover:bg-surface-hover
+               focus-visible:outline-none focus-visible:ring-2
+               focus-visible:ring-secondary"
+      >
+        Reset
+      </button>
+    </div>
+
+    <!-- Live form preview: development only -->
+    <div class="border-t border-border pt-5">
+      <p class="mb-3 text-sm font-semibold text-secondary">
+        Form preview
+      </p>
+
+      <dl class="space-y-2 break-words text-sm">
+        <div>
+          <dt class="inline text-muted">Name: </dt>
+          <dd class="inline text-text">{{ contactForm.value.name || '—' }}</dd>
+        </div>
+
+        <div>
+          <dt class="inline text-muted">Email: </dt>
+          <dd class="inline text-text">{{ contactForm.value.email || '—' }}</dd>
+        </div>
+
+        <div>
+          <dt class="inline text-muted">Message: </dt>
+          <dd class="inline whitespace-pre-wrap text-text">{{ contactForm.value.message || '—' }}</dd>
+        </div>
+      </dl>
+    </div>
+
+  </form>
+</section>

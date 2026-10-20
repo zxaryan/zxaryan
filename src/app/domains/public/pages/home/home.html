@@ -1,0 +1,31 @@
+ <div class="min-h-[70vh] flex flex-col items-center justify-center text-center px-5">
+      
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-text mb-6">
+        SaaS Architecture.<br />
+        <span class="text-muted">Shipped.</span>
+      </h1>
+
+      <!-- The Live Status Pill -->
+      <div class="mt-4">
+        @if (ping(); as p) {
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-soft text-green border border-green-border font-mono text-sm shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-green animate-pulse"></span>
+            {{ p.status }} from {{ p.app }}
+          </span>
+          <p class="text-xs text-subtle mt-3 font-mono">
+            {{ p.timestamp | date:'medium' }}
+          </p>
+        } @else if (error()) {
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface text-danger border border-hairline font-mono text-sm shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-danger"></span>
+            Connection Failed
+          </span>
+        } @else {
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface text-muted border border-hairline font-mono text-sm shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-subtle animate-pulse"></span>
+            Waking up Render...
+          </span>
+        }
+      </div>
+
+    </div>

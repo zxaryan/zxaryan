@@ -1,0 +1,196 @@
+
+<section class="skills-page py-8 sm:py-12">
+
+  <!-- Hero -->
+  <header class="relative mb-10 overflow-hidden rounded-3xl border border-border bg-surface p-6 sm:p-10">
+    <div class="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-24 right-1/4 h-48 w-48 rounded-full bg-secondary/10 blur-3xl"></div>
+
+    <div class="relative z-10">
+      <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5">
+        <span class="h-2 w-2 rounded-full bg-primary"></span>
+        <span class="text-xs font-semibold tracking-wide text-primary">ENGINEERING TOOLKIT</span>
+      </div>
+
+      <h1 class="max-w-3xl text-4xl font-bold tracking-tight text-text sm:text-6xl">
+        My engineering
+        <span class="text-primary">stack.</span>
+      </h1>
+
+      <p class="mt-5 max-w-2xl text-base leading-7 text-muted sm:text-lg">
+        From building full-stack applications to designing backend services,
+        automating deployments, and exploring distributed systems.
+        Here are the technologies and tools I work with.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <div class="rounded-xl border border-border bg-bg/80 px-4 py-3">
+          <p class="text-2xl font-bold text-text">{{ skills.length }}</p>
+          <p class="mt-1 text-xs text-muted">Technologies & tools</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-bg/80 px-4 py-3">
+          <p class="text-2xl font-bold text-primary">{{ categories.length - 1 }}</p>
+          <p class="mt-1 text-xs text-muted">Skill domains</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-bg/80 px-4 py-3">
+          <p class="text-2xl font-bold text-secondary">01</p>
+          <p class="mt-1 text-xs text-muted">Engineering mindset</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Engineering principles -->
+  <div class="mb-10 grid gap-3 sm:grid-cols-3">
+    <article class="rounded-2xl border border-border bg-surface p-5 transition hover:border-primary/50">
+      <span class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-5 w-5">
+          <rect x="3" y="4" width="18" height="5" rx="1.5"/>
+          <rect x="3" y="15" width="18" height="5" rx="1.5"/>
+          <path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/>
+        </svg>
+      </span>
+      <h2 class="font-semibold text-text">Backend engineering</h2>
+      <p class="mt-2 text-sm leading-6 text-muted">APIs, business logic, data persistence, security, and service architecture.</p>
+    </article>
+
+    <article class="rounded-2xl border border-border bg-surface p-5 transition hover:border-secondary/50">
+      <span class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-5 w-5">
+          <rect x="3" y="4" width="18" height="13" rx="2"/>
+          <path d="M8 21h8M12 17v4M8 9l-2 2 2 2M16 9l2 2-2 2"/>
+        </svg>
+      </span>
+      <h2 class="font-semibold text-text">Application development</h2>
+      <p class="mt-2 text-sm leading-6 text-muted">Web interfaces, full-stack applications, mobile experiences, and reusable components.</p>
+    </article>
+
+    <article class="rounded-2xl border border-border bg-surface p-5 transition hover:border-primary/50">
+      <span class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-5 w-5">
+          <path d="M12 3 4 7v5c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V7l-8-4Z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </span>
+      <h2 class="font-semibold text-text">Cloud & delivery</h2>
+      <p class="mt-2 text-sm leading-6 text-muted">Containerization, CI/CD, infrastructure automation, and operational visibility.</p>
+    </article>
+  </div>
+
+  <!-- Search -->
+  <div class="mb-5 flex flex-col gap-3 sm:flex-row">
+    <label class="relative block flex-1">
+      <span class="sr-only">Search skills</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+        class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m16 16 4 4"/>
+      </svg>
+      <input
+        type="search"
+        [(ngModel)]="searchTerm"
+        placeholder="Search Java, Docker, Kafka..."
+        class="w-full rounded-xl border border-border bg-surface py-3 pl-11 pr-4 text-sm text-text outline-none placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
+      />
+    </label>
+
+    <p class="flex items-center text-sm text-muted" aria-live="polite">
+      Showing <span class="mx-1 font-semibold text-text">{{ filteredSkills.length }}</span>
+      of {{ skills.length }}
+    </p>
+  </div>
+
+  <!-- Category filters -->
+  <div class="mb-8 flex gap-2 overflow-x-auto pb-3" aria-label="Filter skills by category">
+    @for (category of categories; track category) {
+      <button
+        type="button"
+        (click)="selectedCategory = category"
+        [attr.aria-pressed]="selectedCategory === category"
+        class="shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition"
+        [class.border-primary]="selectedCategory === category"
+        [class.bg-primary]="selectedCategory === category"
+        [class.text-white]="selectedCategory === category"
+        [class.border-border]="selectedCategory !== category"
+        [class.bg-surface]="selectedCategory !== category"
+        [class.text-muted]="selectedCategory !== category"
+        [class.hover:border-primary]="selectedCategory !== category"
+        [class.hover:text-text]="selectedCategory !== category"
+      >
+        {{ category }}
+      </button>
+    }
+  </div>
+
+  <!-- Skills grid -->
+  @if (filteredSkills.length > 0) {
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      @for (skill of filteredSkills; track skill.name) {
+        <article class="group relative overflow-hidden rounded-2xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:border-primary/50 hover:bg-surface-hover">
+          <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+
+          <div class="flex items-start gap-4">
+            <div
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border bg-bg text-sm font-bold tracking-tight transition group-hover:border-primary/40"
+              [class.text-primary]="skill.tone === 'green'"
+              [class.text-secondary]="skill.tone === 'blue'"
+              [class.text-text]="skill.tone === 'neutral'"
+              aria-hidden="true"
+            >
+              {{ skill.mark }}
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="font-semibold text-text">{{ skill.name }}</h3>
+                @if (skill.featured) {
+                  <span class="rounded-md bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    Core
+                  </span>
+                }
+              </div>
+
+              <p class="mt-1 text-xs font-medium text-muted">{{ skill.category }}</p>
+            </div>
+
+            <span class="mt-1 h-2 w-2 shrink-0 rounded-full"
+              [class.bg-primary]="skill.tone === 'green'"
+              [class.bg-secondary]="skill.tone === 'blue'"
+              [class.bg-muted]="skill.tone === 'neutral'">
+            </span>
+          </div>
+
+          <p class="mt-4 text-sm leading-6 text-muted">{{ skill.description }}</p>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="rounded-2xl border border-dashed border-border bg-surface p-10 text-center">
+      <p class="font-semibold text-text">No matching skills found</p>
+      <p class="mt-2 text-sm text-muted">Try another keyword or select a different category.</p>
+      <button
+        type="button"
+        (click)="searchTerm = ''; selectedCategory = 'All'"
+        class="mt-4 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover"
+      >
+        Clear filters
+      </button>
+    </div>
+  }
+
+  <!-- Closing statement -->
+  <footer class="mt-12 rounded-2xl border border-border bg-surface p-6 sm:p-8">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Beyond the stack</p>
+    <h2 class="mt-3 text-2xl font-bold tracking-tight text-text">
+      Tools matter. <span class="text-muted">Engineering matters more.</span>
+    </h2>
+    <p class="mt-3 max-w-2xl text-sm leading-7 text-muted">
+      I focus on understanding trade-offs, writing maintainable code,
+      designing reliable systems, and continuously improving how software
+      is built, tested, deployed, and operated.
+    </p>
+  </footer>
+
+</section>
