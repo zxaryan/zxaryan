@@ -1,62 +1,98 @@
-
-<header
-  class="sticky top-0 z-50 w-full border-b border-border
-         bg-bg/90 backdrop-blur-xl"
->
+<header class="sticky top-0 z-50 relative w-full border-b border-border bg-bg/90 backdrop-blur-xl">
   <nav
-    class="mx-auto flex h-16 max-w-7xl items-center justify-between
-           px-4 sm:px-6 lg:px-8"
+    class="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
     aria-label="Main navigation"
   >
     <!-- Brand -->
     <a
       routerLink="/"
-      class="text-xl font-bold tracking-tight text-text
-             transition-colors hover:text-primary"
+      class="shrink-0 text-xl font-bold tracking-tight text-text transition-colors hover:text-primary"
       aria-label="zxaryan home"
     >
       zxaryan<span class="text-primary">.</span>
     </a>
 
-    <!-- Navigation links -->
-    <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
-
-      <a
-        routerLink="/"
-        routerLinkActive="!text-primary bg-surface"
+    <!-- Desktop navigation -->
+    <div class="hidden items-center gap-2 md:flex lg:gap-4">
+      <a routerLink="/" routerLinkActive="!text-primary bg-surface"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="rounded-lg px-3 py-2 text-sm font-medium
-               text-muted transition-colors hover:text-text"
-      >
+        class="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-text">
         Home
       </a>
 
-      <a
-        routerLink="/skills"
-        routerLinkActive="!text-primary bg-surface"
-        class="rounded-lg px-3 py-2 text-sm font-medium
-               text-muted transition-colors hover:text-text"
-      >
+      <a routerLink="/skills" routerLinkActive="!text-primary bg-surface"
+        class="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-text">
         Skills
       </a>
-      <a
-        routerLink="/projects"
-        routerLinkActive="!text-primary bg-surface"
-        class="rounded-lg px-3 py-2 text-sm font-medium
-               text-muted transition-colors hover:text-text"
-      >
+
+      <a routerLink="/projects" routerLinkActive="!text-primary bg-surface"
+        class="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-text">
         Projects
       </a>
-      <a
-        routerLink="/contact"
-        routerLinkActive="!border-primary !text-primary"
-        class="rounded-lg border border-border px-4 py-2
-               text-sm font-semibold text-text transition-colors
-               hover:border-primary hover:text-primary"
-      >
+
+      <a routerLink="/contact" routerLinkActive="!border-primary !text-primary"
+        class="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-text transition-colors hover:border-primary hover:text-primary">
         Contact
       </a>
-
     </div>
+
+    <!-- Mobile menu button -->
+    <button
+      type="button"
+      class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-text transition hover:bg-surface md:hidden"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="mobile-navigation"
+      [attr.aria-label]="menuOpen ? 'Close navigation menu' : 'Open navigation menu'"
+      (click)="toggleMenu()"
+    >
+      @if (menuOpen) {
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          class="h-5 w-5" aria-hidden="true">
+          <path d="m18 6-12 12M6 6l12 12" />
+        </svg>
+      } @else {
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          class="h-5 w-5" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      }
+    </button>
   </nav>
+
+  <!-- Mobile dropdown overlay -->
+  @if (menuOpen) {
+    <div
+      id="mobile-navigation"
+      class="absolute left-0 right-0 top-full z-50 border-b border-border bg-bg px-4 py-3 shadow-xl sm:px-6 md:hidden"
+    >
+      <div class="mx-auto flex w-full max-w-7xl flex-col gap-1">
+        <a routerLink="/" routerLinkActive="!text-primary bg-surface"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeMenu()"
+          class="rounded-lg px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-surface-hover hover:text-text">
+          Home
+        </a>
+
+        <a routerLink="/skills" routerLinkActive="!text-primary bg-surface"
+          (click)="closeMenu()"
+          class="rounded-lg px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-surface-hover hover:text-text">
+          Skills
+        </a>
+
+        <a routerLink="/projects" routerLinkActive="!text-primary bg-surface"
+          (click)="closeMenu()"
+          class="rounded-lg px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-surface-hover hover:text-text">
+          Projects
+        </a>
+
+        <a routerLink="/contact" routerLinkActive="!text-primary bg-surface"
+          (click)="closeMenu()"
+          class="rounded-lg px-4 py-3 text-sm font-semibold text-text transition-colors hover:bg-surface-hover">
+          Contact
+        </a>
+      </div>
+    </div>
+  }
 </header>
